@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class InputTextField extends Element {
 	public static final int DEFAULT_BORDER_THICKNESS = 4;
@@ -19,7 +19,7 @@ public class InputTextField extends Element {
 	private Box outerContent;
 	private Box innerContent;
 
-	public InputTextField(VerticalPushLayout layout, String id, Label text) {
+	public InputTextField(BaseLayout layout, String id, Label text) {
 		super(layout, id);
 
 		this.text = text;
@@ -54,7 +54,7 @@ public class InputTextField extends Element {
 	
 	public InputTextField SetPadding(Vector2 padding) {
 		this.padding = padding;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 	
@@ -70,7 +70,7 @@ public class InputTextField extends Element {
 	
 	public InputTextField SetBorderThickness(int thickness) {
 		this.borderThickness = thickness;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 

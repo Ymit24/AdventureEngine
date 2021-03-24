@@ -4,13 +4,13 @@ import java.awt.Color;
 
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class LineBreak extends Element {
 	private int height;
 	private Color color;
 	
-	public LineBreak(VerticalPushLayout layout, String id, int height) {
+	public LineBreak(BaseLayout layout, String id, int height) {
 		super(layout, id);
 		this.height = height;
 		color = Color.white;

@@ -1,11 +1,11 @@
 package com.christian.adventureengine.ui.elements;
 
+import java.awt.Color;
+
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
-
-import java.awt.*;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class ProgressBar extends Element {
     private Label label;
@@ -16,7 +16,7 @@ public class ProgressBar extends Element {
     private int maxValue;
     private String prefix;
 
-    public ProgressBar(VerticalPushLayout layout, String id, Label label) {
+    public ProgressBar(BaseLayout layout, String id, Label label) {
         super(layout, id);
         this.label = label;
         this.children = new Element[]{label};

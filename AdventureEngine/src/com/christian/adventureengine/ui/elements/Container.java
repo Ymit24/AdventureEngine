@@ -1,16 +1,15 @@
 package com.christian.adventureengine.ui.elements;
 
+import java.awt.Color;
+
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
-import com.christian.adventureengine.logic.Controller;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
-
-import java.awt.*;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class Container extends Element {
     private Color backgroundColor;
-    public Container(VerticalPushLayout layout, String id, Element[] children) {
+    public Container(BaseLayout layout, String id, Element[] children) {
         super(layout, id);
         this.children = children;
         this.backgroundColor = Color.black;

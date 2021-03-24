@@ -5,7 +5,7 @@ import java.awt.Color;
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class Label extends Element {
 	public enum Alignment {
@@ -20,7 +20,7 @@ public class Label extends Element {
 	
 	public Alignment alignment;
 	
-	public Label(VerticalPushLayout layout, String id, String text) {
+	public Label(BaseLayout layout, String id, String text) {
 		super(layout, id);
 		
 		this.text = text;
@@ -32,19 +32,19 @@ public class Label extends Element {
 
 	public Label SetPadding(Vector2 padding) {
 		this.padding = padding;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 	
 	public Label SetFontSize(int fontSize) {
 		this.fontSize = fontSize;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 
 	public Label SetFontFamily(String fontFamily) {
 		this.fontFamily = fontFamily;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 	
