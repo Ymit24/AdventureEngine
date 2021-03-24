@@ -38,6 +38,12 @@ public class VerticalPushLayout implements IMouseClickListener, IKeyListener {
 		}
 	}
 	
+	/**
+	 * Push an element onto the layout.
+	 * NOTE: This does not flag the UI for
+	 * recalculation.
+	 * @param element
+	 */
 	public void PushElement(Element element) {
 		element.bounds.position = new Vector2(bounds.position.x, currentY);
 		currentY += element.bounds.size.y;

@@ -115,6 +115,12 @@ public class CoreRenderer implements IRenderer {
 		System.out.println("Pixels per world unit: " + pixelsPerWorldUnit.toString());
 	}
 
+	/**
+	 * Create a vertical push layout user interface layer.
+	 * @param bounds these are measured in screen space for
+	 * the bounding region that the interface will take up.
+	 * @return A reference to the layout created.
+	 */
 	@Override
 	public VerticalPushLayout CreateUILayout(Box bounds) {
 		VerticalPushLayout layout = VerticalPushLayout.Create(bounds);
