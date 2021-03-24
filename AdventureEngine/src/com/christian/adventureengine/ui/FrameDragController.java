@@ -30,7 +30,6 @@ public class FrameDragController extends Controller {
 		Vector2 mousePosition = Input.GetMouseListener().GetPosition();
 		if (dragging != null) {
 			dragging.Bounds.position = new Vector2(mousePosition).Add(offsetFromTitleBar);
-			dragging.Layout.Recalculate();
 			return;
 		}
 		

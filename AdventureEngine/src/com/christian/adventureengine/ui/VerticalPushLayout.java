@@ -35,17 +35,17 @@ public class VerticalPushLayout extends BaseLayout {
 	
 	@Override
 	public void Recalculate() {
-		currentY = (int)Bounds.position.y;
+		currentY = 0;
 		for (Element el : elements) {
 			int height = el.CalculateHeight();
-			el.UpdateBounds(new Box(Bounds.position.x, currentY, Bounds.size.x, height));
+			el.UpdateBounds(new Box(0, currentY, Bounds.size.x, height));
 			currentY += height;
 		}
 	}
 
 	@Override
 	public void PushElement(Element element) {
-		element.bounds.position = new Vector2(Bounds.position.x, currentY);
+		element.bounds.position = new Vector2(0, currentY);
 		currentY += element.bounds.size.y;
 		
 		elements.add(element);

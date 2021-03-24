@@ -8,6 +8,7 @@ import com.christian.adventureengine.ui.VerticalPushLayout;
 
 public abstract class Element {
 	public static final Vector2 DEFAULT_PADDING = new Vector2(4,4);
+	
 	public BaseLayout layout;
 	public Vector2 padding;
 	public Box bounds;
@@ -78,6 +79,12 @@ public abstract class Element {
 				maxHeight = height;
 		}
 		return maxHeight;
+	}
+	
+	protected Box OffsetByLayout(Box old) {
+		Box new_bounds = new Box(old);
+		new_bounds.position = new_bounds.position.Add(layout.Bounds.position);
+		return new_bounds;
 	}
 	
 	public void draw(IRenderer renderer) {

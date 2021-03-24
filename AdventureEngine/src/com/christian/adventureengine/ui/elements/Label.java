@@ -85,6 +85,6 @@ public class Label extends Element {
 			x = (int)(bounds.position.x + bounds.size.x - renderer.GetFontWidth(text) - padding.x);
 			y = (int)(bounds.position.y + ((bounds.size.y / 2) - fontSize / 2));
 		}
-		renderer.DrawScreenText(text, new Vector2(x, y));
+		renderer.DrawScreenText(text, new Vector2(x, y).Add(layout.Bounds.position));
 	}
 }

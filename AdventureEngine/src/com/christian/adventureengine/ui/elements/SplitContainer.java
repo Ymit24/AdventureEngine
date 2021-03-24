@@ -63,7 +63,7 @@ public class SplitContainer extends Element {
 
 	@Override
 	public void draw(IRenderer renderer) {
-		renderer.FillBox(bounds, backgroundColor);
+		renderer.FillBox(OffsetByLayout(bounds), backgroundColor);
 		super.draw(renderer);
 	}
 }

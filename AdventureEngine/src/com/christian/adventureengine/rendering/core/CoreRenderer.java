@@ -340,12 +340,9 @@ public class CoreRenderer implements IRenderer {
 //				el.draw(this);
 //			}
 //		}
-		
+
 		for (Frame frame : frames) {
-			FillBox(frame.Bounds, Color.gray);
-			for (Element el : frame.Layout.elements) {
-				el.draw(this);
-			}
+			frame.Render(this);
 		}
 		
 		canDraw = false;

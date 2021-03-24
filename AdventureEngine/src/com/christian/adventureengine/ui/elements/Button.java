@@ -84,8 +84,8 @@ public class Button extends Element {
 	
 	@Override
 	public void draw(IRenderer renderer) {
-		renderer.FillBox(outerContent, borderColor);
-		renderer.FillBox(innerContent, backgroundColor);
+		renderer.FillBox(OffsetByLayout(outerContent), borderColor);
+		renderer.FillBox(OffsetByLayout(innerContent), backgroundColor);
 		text.draw(renderer);
 	}
 }

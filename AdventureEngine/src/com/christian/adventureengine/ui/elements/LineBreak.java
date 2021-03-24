@@ -33,6 +33,6 @@ public class LineBreak extends Element {
 	
 	@Override
 	public void draw(IRenderer renderer) {
-		renderer.FillBox(bounds, color);
+		renderer.FillBox(OffsetByLayout(bounds), color);
 	}
 }

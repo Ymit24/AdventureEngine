@@ -79,10 +79,10 @@ public class ProgressBar extends Element {
 
     @Override
     public void draw(IRenderer renderer) {
-        renderer.FillBox(bounds, emptyColor);
+        renderer.FillBox(OffsetByLayout(bounds), emptyColor);
 
         float percent = (float)currentValue / (float)maxValue;
-        renderer.FillBox(new Box(bounds.position, new Vector2(bounds.size.x * percent, bounds.size.y)), filledColor);
+        renderer.FillBox(OffsetByLayout(new Box(bounds.position, new Vector2(bounds.size.x * percent, bounds.size.y))), filledColor);
 
         label.draw(renderer);
     }
