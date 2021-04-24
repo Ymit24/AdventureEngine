@@ -144,6 +144,7 @@ public class CoreRenderer implements IRenderer {
 		int titleBarThickness
 	) {
 		Frame frame = new Frame(
+				this,
 			title,
 			id,
 			bounds,
@@ -155,6 +156,11 @@ public class CoreRenderer implements IRenderer {
 		
 		frames.add(frame);
 		return frame;
+	}
+	
+	@Override
+	public void RemoveFrame(Frame frame) {
+		frames.remove(frame);
 	}
 
 	@Override

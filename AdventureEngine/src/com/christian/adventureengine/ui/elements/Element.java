@@ -36,7 +36,7 @@ public abstract class Element {
 				}
 			}
 		}
-		return bounds.Includes(screenLocation) ? this : null;
+		return OffsetByLayout(bounds).Includes(screenLocation) ? this : null;
 	}
 	
 	public void HandleKey(int keycode) {

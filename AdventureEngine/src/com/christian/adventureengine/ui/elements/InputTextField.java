@@ -35,7 +35,7 @@ public class InputTextField extends Element {
 	
 	@Override
 	public Element HitTest(Vector2 screenLocation) {
-		return bounds.Includes(screenLocation) ? this : null;
+		return OffsetByLayout(bounds).Includes(screenLocation) ? this : null;
 	}
 	
 	@Override

@@ -1,12 +1,7 @@
 package com.christian.adventureengine.ui;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
-import com.christian.adventureengine.input.IKeyListener;
-import com.christian.adventureengine.input.IMouseClickListener;
 import com.christian.adventureengine.ui.elements.Element;
 	
 public class VerticalPushLayout extends BaseLayout {
@@ -17,7 +12,6 @@ public class VerticalPushLayout extends BaseLayout {
 	protected VerticalPushLayout(Box bounds) {
 		super(bounds);
 	}
-	
 	
 	/**
 	 * Factory method to generate a VerticalPushLayout object.
@@ -78,13 +72,19 @@ public class VerticalPushLayout extends BaseLayout {
 						hit.HandleClick(isDown);
 					}
 					else {
-						if (active != null) {
-							active.isActive = false;
-						}
-						active = null;
-						hit.HandleClick(isDown);
+//						if (active != null) {
+//							active.isActive = false;
+//						}
+//						active = null;
+//						hit.HandleClick(isDown);
 					}
 					return true;
+				}
+				else if (isDown){
+					if (active != null) {
+						active.isActive = false;
+					}
+					active = null;
 				}
 			}
 			return true;

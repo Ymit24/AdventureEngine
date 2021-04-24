@@ -34,6 +34,8 @@ public interface IRenderer {
 		int titleBarThickness
 	);
 	
+	public void RemoveFrame(Frame frame);
+	
 	public ArrayList<Frame> GetFrames();
 	
 	public void AddView(View view);
