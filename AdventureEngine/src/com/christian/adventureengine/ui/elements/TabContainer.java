@@ -3,13 +3,13 @@ package com.christian.adventureengine.ui.elements;
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
-import com.christian.adventureengine.ui.VerticalPushLayout;
+import com.christian.adventureengine.ui.BaseLayout;
 
 public class TabContainer extends Element {
     private Container[] containers;
     private int activeIndex;
 
-    public TabContainer(VerticalPushLayout layout, String id, Container[] containers) {
+    public TabContainer(BaseLayout layout, String id, Container[] containers) {
         super(layout, id);
         this.containers = containers;
         activeIndex = 0;
@@ -17,7 +17,7 @@ public class TabContainer extends Element {
 
     public TabContainer SetActiveIndex(int activeIndex) {
         this.activeIndex = activeIndex;
-        layout.RecalculateHeights();
+        layout.Recalculate();
         return this;
     }
 

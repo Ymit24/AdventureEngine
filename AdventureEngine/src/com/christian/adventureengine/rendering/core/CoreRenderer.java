@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.List;
 
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
@@ -22,10 +22,10 @@ import com.christian.adventureengine.rendering.UIView;
 import com.christian.adventureengine.rendering.View;
 import com.christian.adventureengine.rendering.sprites.Sprite;
 import com.christian.adventureengine.rendering.sprites.Sprites;
+import com.christian.adventureengine.ui.Frame;
+import com.christian.adventureengine.ui.LayoutType;
 import com.christian.adventureengine.ui.VerticalPushLayout;
 import com.christian.adventureengine.ui.elements.Element;
-
-import javax.swing.*;
 
 public class CoreRenderer implements IRenderer {
 	private int displayWidth = 1280;
@@ -51,6 +51,7 @@ public class CoreRenderer implements IRenderer {
 	private Camera camera;
 	
 	private ArrayList<VerticalPushLayout> uiLayouts;
+	private ArrayList<Frame> frames;
 	
 	public CoreRenderer() {
 		canDraw = false;
@@ -73,6 +74,7 @@ public class CoreRenderer implements IRenderer {
 		SetFontSize(DEFAULT_FONTSIZE);
 		currentColor = DEFAULT_COLOR;
 		uiLayouts = new ArrayList<VerticalPushLayout>();
+		frames = new ArrayList<>();
 
 		orderedViews = new ArrayList<>();
 		orderedViews.add(new UIView(UI_LAYER));
@@ -129,6 +131,41 @@ public class CoreRenderer implements IRenderer {
 		Input.GetMouseListener().AddMouseClickListener(layout);
 		Input.GetKeyboardListener().AddKeyListener(layout);
 		return layout;
+	}
+	
+	@Override
+	public Frame CreateFrame(
+		String title,
+		String id,
+		Box bounds,
+		LayoutType layoutType,
+		boolean moveable,
+		boolean resizeable,
+		int titleBarThickness
+	) {
+		Frame frame = new Frame(
+				this,
+			title,
+			id,
+			bounds,
+			layoutType,
+			moveable,
+			resizeable,
+			titleBarThickness
+		);
+		
+		frames.add(frame);
+		return frame;
+	}
+	
+	@Override
+	public void RemoveFrame(Frame frame) {
+		frames.remove(frame);
+	}
+
+	@Override
+	public ArrayList<Frame> GetFrames() {
+		return frames;
 	}
 	
 	@Override
@@ -304,10 +341,14 @@ public class CoreRenderer implements IRenderer {
 			view.draw(this);
 		}
 		
-		for (VerticalPushLayout layout : uiLayouts) {
-			for (Element el : layout.elements) {
-				el.draw(this);
-			}
+//		for (VerticalPushLayout layout : uiLayouts) {
+//			for (Element el : layout.elements) {
+//				el.draw(this);
+//			}
+//		}
+
+		for (Frame frame : frames) {
+			frame.Render(this);
 		}
 		
 		canDraw = false;

@@ -24,6 +24,17 @@ public class Box {
 		this.size = size;
 	}
 	
+	/**
+	 * This is a copy constructor.
+	 * All raw x,y values will be
+	 * copied into new vectors
+	 * @param copy The Box to copy from.
+	 */
+	public Box(Box copy) {
+		position = new Vector2(copy.position);
+		size = new Vector2(copy.size);
+	}
+	
 	public float GetTop() {
 		return position.y;
 	}

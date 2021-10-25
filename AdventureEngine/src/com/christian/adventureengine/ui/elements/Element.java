@@ -3,11 +3,13 @@ package com.christian.adventureengine.ui.elements;
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
+import com.christian.adventureengine.ui.BaseLayout;
 import com.christian.adventureengine.ui.VerticalPushLayout;
 
 public abstract class Element {
 	public static final Vector2 DEFAULT_PADDING = new Vector2(4,4);
-	public VerticalPushLayout layout;
+	
+	public BaseLayout layout;
 	public Vector2 padding;
 	public Box bounds;
 	public String id;
@@ -16,7 +18,7 @@ public abstract class Element {
 	public Element[] children;
 	public boolean isActive;
 	
-	public Element(VerticalPushLayout layout, String id) {
+	public Element(BaseLayout layout, String id) {
 		this.layout = layout;
 		this.id = id;
 		bounds = new Box(0,0,0,0);
@@ -34,7 +36,7 @@ public abstract class Element {
 				}
 			}
 		}
-		return bounds.Includes(screenLocation) ? this : null;
+		return OffsetByLayout(bounds).Includes(screenLocation) ? this : null;
 	}
 	
 	public void HandleKey(int keycode) {
@@ -77,6 +79,12 @@ public abstract class Element {
 				maxHeight = height;
 		}
 		return maxHeight;
+	}
+	
+	protected Box OffsetByLayout(Box old) {
+		Box new_bounds = new Box(old);
+		new_bounds.position = new_bounds.position.Add(layout.Bounds.position);
+		return new_bounds;
 	}
 	
 	public void draw(IRenderer renderer) {

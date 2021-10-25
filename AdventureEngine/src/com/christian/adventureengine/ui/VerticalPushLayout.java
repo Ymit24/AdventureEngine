@@ -1,56 +1,51 @@
 package com.christian.adventureengine.ui;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
-import com.christian.adventureengine.input.IKeyListener;
-import com.christian.adventureengine.input.IMouseClickListener;
 import com.christian.adventureengine.ui.elements.Element;
 	
-public class VerticalPushLayout implements IMouseClickListener, IKeyListener {
-	public Box bounds;
+public class VerticalPushLayout extends BaseLayout {
+	protected int currentY;
 	
-	public ArrayList<Element> elements;
+	protected Element active;
+
+	protected VerticalPushLayout(Box bounds) {
+		super(bounds);
+	}
 	
-	private int currentY;
-	
-	public Element active;
-	
+	/**
+	 * Factory method to generate a VerticalPushLayout object.
+	 * @param bounds The screen space region that this layout
+	 * is responsible for.
+	 * @return The newly created VerticalPushLayout.
+	 */
 	public static VerticalPushLayout Create(Box bounds) {
-		VerticalPushLayout layout = new VerticalPushLayout();
-		layout.bounds = bounds;
-		
-		layout.elements = new ArrayList<>();
+		VerticalPushLayout layout = new VerticalPushLayout(bounds);
 		
 		layout.currentY = (int)bounds.position.y;
 		
 		return layout;
 	}
 	
-	public void RecalculateHeights() {
-		currentY = (int)bounds.position.y;
+	@Override
+	public void Recalculate() {
+		currentY = 0;
 		for (Element el : elements) {
 			int height = el.CalculateHeight();
-			el.UpdateBounds(new Box(bounds.position.x, currentY, bounds.size.x, height));
+			el.UpdateBounds(new Box(0, currentY, Bounds.size.x, height));
 			currentY += height;
 		}
 	}
-	
-	/**
-	 * Push an element onto the layout.
-	 * NOTE: This does not flag the UI for
-	 * recalculation.
-	 * @param element
-	 */
+
+	@Override
 	public void PushElement(Element element) {
-		element.bounds.position = new Vector2(bounds.position.x, currentY);
+		element.bounds.position = new Vector2(0, currentY);
 		currentY += element.bounds.size.y;
 		
 		elements.add(element);
 	}
 	
+	@Override
 	public Element FindElementById(String id) {
 		for (Element el : elements) {
 			Element found = el.FindId(id);
@@ -63,7 +58,7 @@ public class VerticalPushLayout implements IMouseClickListener, IKeyListener {
 
 	@Override
 	public boolean OnClick(Vector2 screenLocation, int button, boolean isDown) {
-		if (bounds.Includes(screenLocation)) {
+		if (Bounds.Includes(screenLocation)) {
 			for (Element el : elements) {
 				Element hit = el.HitTest(screenLocation);
 				if (hit != null) {
@@ -77,13 +72,19 @@ public class VerticalPushLayout implements IMouseClickListener, IKeyListener {
 						hit.HandleClick(isDown);
 					}
 					else {
-						if (active != null) {
-							active.isActive = false;
-						}
-						active = null;
-						hit.HandleClick(isDown);
+//						if (active != null) {
+//							active.isActive = false;
+//						}
+//						active = null;
+//						hit.HandleClick(isDown);
 					}
 					return true;
+				}
+				else if (isDown){
+					if (active != null) {
+						active.isActive = false;
+					}
+					active = null;
 				}
 			}
 			return true;

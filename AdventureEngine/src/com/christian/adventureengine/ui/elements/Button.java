@@ -5,8 +5,8 @@ import java.awt.Color;
 import com.christian.adventureengine.data.Box;
 import com.christian.adventureengine.data.Vector2;
 import com.christian.adventureengine.rendering.IRenderer;
+import com.christian.adventureengine.ui.BaseLayout;
 import com.christian.adventureengine.ui.IButtonCallback;
-import com.christian.adventureengine.ui.VerticalPushLayout;
 
 public class Button extends Element {
 	public Label text;
@@ -20,7 +20,7 @@ public class Button extends Element {
 	
 	private IButtonCallback callback;
 	
-	public Button(VerticalPushLayout layout, String id, Label text) {
+	public Button(BaseLayout layout, String id, Label text) {
 		super(layout, id);
 		
 		this.text = text;
@@ -31,7 +31,7 @@ public class Button extends Element {
 	
 	public Button SetPadding(Vector2 padding) {
 		this.padding = padding;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 	
@@ -47,7 +47,7 @@ public class Button extends Element {
 	
 	public Button SetBorderThickness(int thickness) {
 		this.borderThickness = thickness;
-		layout.RecalculateHeights();
+		layout.Recalculate();
 		return this;
 	}
 	
@@ -84,8 +84,8 @@ public class Button extends Element {
 	
 	@Override
 	public void draw(IRenderer renderer) {
-		renderer.FillBox(outerContent, borderColor);
-		renderer.FillBox(innerContent, backgroundColor);
+		renderer.FillBox(OffsetByLayout(outerContent), borderColor);
+		renderer.FillBox(OffsetByLayout(innerContent), backgroundColor);
 		text.draw(renderer);
 	}
 }
