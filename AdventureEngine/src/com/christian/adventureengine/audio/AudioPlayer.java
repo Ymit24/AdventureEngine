@@ -7,6 +7,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import com.christian.adventureengine.utils.ResourceManager;
+
 public class AudioPlayer {
 	private static HashMap<String, Clip> clips = new HashMap<String, Clip>();
 	
@@ -16,7 +18,7 @@ public class AudioPlayer {
 	 */
 	public static void Load(String filename) {
 		try {
-			AudioInputStream stream = AudioSystem.getAudioInputStream(new File("./res/" + filename).getAbsoluteFile());
+			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(ResourceManager.GetResourceManager().GetAudioFilepath(filename)).getAbsoluteFile());
 			Clip clip = AudioSystem.getClip();
 			clip.open(stream);
 

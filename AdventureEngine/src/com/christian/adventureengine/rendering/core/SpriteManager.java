@@ -12,6 +12,7 @@ import com.christian.adventureengine.rendering.Camera;
 import com.christian.adventureengine.rendering.sprites.ISpriteManager;
 import com.christian.adventureengine.rendering.sprites.ISpriteType;
 import com.christian.adventureengine.rendering.sprites.Sprite;
+import com.christian.adventureengine.utils.ResourceManager;
 
 public class SpriteManager implements ISpriteManager {
 	private HashMap<ISpriteType,Sprite> sprites;
@@ -30,7 +31,7 @@ public class SpriteManager implements ISpriteManager {
 	private Sprite LoadSpriteFromFile(String filename) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("./res/" + filename));
+			image = ImageIO.read(new File(ResourceManager.GetResourceManager().GetSpriteFilepath(filename)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
