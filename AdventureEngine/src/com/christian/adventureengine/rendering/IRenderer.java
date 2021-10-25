@@ -31,6 +31,7 @@ public interface IRenderer {
 		LayoutType layoutType,
 		boolean moveable,
 		boolean resizeable,
+		boolean closeable,
 		int titleBarThickness
 	);
 	

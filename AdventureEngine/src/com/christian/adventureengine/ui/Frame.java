@@ -30,6 +30,7 @@ public class Frame {
 		LayoutType layoutType,
 		boolean moveable,
 		boolean resizeable,
+		boolean closeable,
 		int titleBarThickness
 	)
 	{
@@ -45,12 +46,14 @@ public class Frame {
 		switch (layoutType) {
 			case VERTICAL_PUSH: {
 				Layout = VerticalPushLayout.Create(Bounds);
-				Layout.PushElement(new TitleBar(Layout, this)
-					.SetTitle(new Label(Layout, "_titlebar_title_", Title)
-						.SetFontSize(18)
-						.SetFontColor(Color.white)
-						.SetPadding(Vector2.One().Mul(2))
-						.SetAlignment(Alignment.CENTER)));
+				if (titleBarThickness != 0) {
+					Layout.PushElement(new TitleBar(Layout, this, closeable)
+						.SetTitle(new Label(Layout, "_titlebar_title_", Title)
+							.SetFontSize(18)
+							.SetFontColor(Color.white)
+							.SetPadding(Vector2.One().Mul(2))
+							.SetAlignment(Alignment.CENTER)));
+				}
 				Layout.Recalculate();
 				Input.GetMouseListener().AddMouseClickListener(Layout);
 				Input.GetKeyboardListener().AddKeyListener(Layout);
@@ -84,7 +87,8 @@ public class Frame {
 	 * this frame with.
 	 */
 	public void Render(IRenderer renderer) {
-		renderer.FillBox(Bounds, Color.gray);
+		//TODO: MAYBE ADD WAY TO GIVE FRAME A BACKGROUND OPTIONALLY. 
+		//renderer.FillBox(Bounds, Color.gray);
 		for (Element el : Layout.elements) {
 			el.draw(renderer);
 		}

@@ -77,7 +77,6 @@ public class CoreRenderer implements IRenderer {
 		frames = new ArrayList<>();
 
 		orderedViews = new ArrayList<>();
-		orderedViews.add(new UIView(UI_LAYER));
 	}
 
 	public int GetDisplayWidth() {
@@ -141,16 +140,18 @@ public class CoreRenderer implements IRenderer {
 		LayoutType layoutType,
 		boolean moveable,
 		boolean resizeable,
+		boolean closeable,
 		int titleBarThickness
 	) {
 		Frame frame = new Frame(
-				this,
+			this,
 			title,
 			id,
 			bounds,
 			layoutType,
 			moveable,
 			resizeable,
+			closeable,
 			titleBarThickness
 		);
 		
@@ -259,10 +260,9 @@ public class CoreRenderer implements IRenderer {
 		if (canDraw == false || camera.isInCameraBounds(location, size) == false)
 			return;
 		Vector2 pixelLocation = camera.CalculateWorldToScreen(location);
-		
-		Vector2 cameraEndCorner = camera.CalculateWorldToScreen(camera.GetPosition().Add(camera.GetWorldSpace()));
-		graphics.setClip(0, 0, (int)cameraEndCorner.x, (int)cameraEndCorner.y);
-		
+
+		Box clipBounds = camera.GetScreenSpace();
+		graphics.setClip((int)clipBounds.position.x, (int)clipBounds.position.y, (int)clipBounds.size.x, (int)clipBounds.size.y);
 		graphics.drawImage(
 			sprite.GetImage(),
 			Math.round(pixelLocation.x),
@@ -341,12 +341,6 @@ public class CoreRenderer implements IRenderer {
 			view.draw(this);
 		}
 		
-//		for (VerticalPushLayout layout : uiLayouts) {
-//			for (Element el : layout.elements) {
-//				el.draw(this);
-//			}
-//		}
-
 		for (Frame frame : frames) {
 			frame.Render(this);
 		}

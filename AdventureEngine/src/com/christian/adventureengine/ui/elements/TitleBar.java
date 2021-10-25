@@ -14,12 +14,16 @@ public class TitleBar extends Element implements IButtonCallback {
 	private Label Title;
 	private Button QuitButton;
 	private Frame parent;
+	private boolean closeable;
 	
-	public TitleBar(BaseLayout layout, Frame parent) {
+	public TitleBar(BaseLayout layout, Frame parent, boolean closeable) {
 		super(layout, "_");
 		this.parent = parent;
-		QuitButton = new Button(layout, "_titlebar_quit_", new Label(layout,"_","X"))
-				.SetCallback(this);
+		this.closeable = closeable;
+		if (closeable) {
+			QuitButton = new Button(layout, "_titlebar_quit_", new Label(layout,"_","X"))
+					.SetCallback(this);
+		}
 	}
 
 	public TitleBar SetThickness(int thickness) {
@@ -43,22 +47,30 @@ public class TitleBar extends Element implements IButtonCallback {
 				)
 			);
 		}
-		QuitButton.UpdateBounds(
-			new Box(
-				bounds.position.Add(new Vector2(bounds.size.x-Thickness,0)),
-				new Vector2(Thickness, bounds.size.y)
-			)
-		);
+		if (closeable) {
+			QuitButton.UpdateBounds(
+				new Box(
+					bounds.position.Add(new Vector2(bounds.size.x-Thickness,0)),
+					new Vector2(Thickness, bounds.size.y)
+				)
+			);
+		}
 	}
 	
 	@Override
 	public Element HitTest(Vector2 screenLocation) {
-		return QuitButton.HitTest(screenLocation);
+		if (closeable) {
+			return QuitButton.HitTest(screenLocation);
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
 	public void HandleClick(boolean isDown) {
-		QuitButton.HandleClick(isDown);
+		if (closeable) {
+			QuitButton.HandleClick(isDown);
+		}
 		super.HandleClick(isDown);
 	}
 	
@@ -77,11 +89,15 @@ public class TitleBar extends Element implements IButtonCallback {
 //			)
 //		), Color.red);
 		Title.draw(renderer);
-		QuitButton.draw(renderer);
+		if (closeable) {
+			QuitButton.draw(renderer);
+		}
 	}
 
 	@Override
 	public void OnButtonClicked(String id) {
-		parent.Renderer.RemoveFrame(parent);
+		if (closeable) {
+			parent.Renderer.RemoveFrame(parent);
+		}
 	}
 }

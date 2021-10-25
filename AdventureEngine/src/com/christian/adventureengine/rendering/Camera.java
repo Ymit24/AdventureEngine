@@ -51,6 +51,10 @@ public class Camera {
 	public void Move(Vector2 delta) {
 		position = position.Add(delta);
 	}
+	
+	public Box GetScreenSpace() {
+		return new Box(screenSpace);
+	}
 
 	public Vector2 CalculateWorldToScreen(Vector2 worldLocation) {
 		Vector2 pixelLocation = new Vector2(

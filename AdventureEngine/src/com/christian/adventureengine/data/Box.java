@@ -1,9 +1,6 @@
 package com.christian.adventureengine.data;
 
-import com.christian.adventureengine.utils.Collision;
 import com.christian.adventureengine.utils.Randomizer;
-
-import java.util.Random;
 
 public class Box {
 	public Vector2 position;
